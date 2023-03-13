@@ -5,7 +5,7 @@ import demoRouters from './modules/demo';
 const routes = [...demoRouters];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(),
   routes,
   scrollBehavior() {
     return {

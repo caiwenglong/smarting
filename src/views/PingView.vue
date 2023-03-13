@@ -6,7 +6,16 @@ import SearchComponent from '@/components/SearchComponent.vue';
 import EleBaseTable from '@/components/EleBaseTable.vue';
 
 const tableData = reactive([]);
-const identity = ref('ping');
+const tableHeader = reactive([
+  { prop: 'name', label: '节点名称' },
+  { prop: 'ip', label: '响应IP' },
+  { prop: 'LossPk', label: '丢包' },
+  { prop: 'SendPk', label: '发包' },
+  { prop: 'RevcPk', label: '收包' },
+  { prop: 'MaxDelay', label: '最慢(ms)' },
+  { prop: 'AvgDelay', label: '平均(ms)' },
+]);
+const identity = ref('port');
 
 const indexDataStore = useIndexData();
 
@@ -34,6 +43,7 @@ const handleGetDataByIdentify = () => {
     if (res && res.length) {
       tableData.push(...res);
     }
+    console.log(tableData)
   });
 };
 </script>
@@ -41,17 +51,6 @@ const handleGetDataByIdentify = () => {
 <template>
   <div class="page-ping">
     <SearchComponent @handle-search-data="handleSearchData"></SearchComponent>
-    <EleBaseTable :table-data="tableData"></EleBaseTable>
+    <EleBaseTable :table-data="tableData" :table-header="tableHeader"></EleBaseTable>
   </div>
 </template>
-
-<style lang="scss">
-.el-input {
-  width: 100%;
-  transition: width 0.4s ease-in-out;
-}
-
-.el-input--medium:focus {
-  width: 70%;
-}
-</style>

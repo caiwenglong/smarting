@@ -37,6 +37,9 @@ const handleSwitchMenu = (param) => {
 </template>
 
 <style>
+.nav-wrapper {
+  width: 100%;
+}
 .nav-wrapper .el-menu {
   padding: 0 42px;
 }

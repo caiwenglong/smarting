@@ -16,3 +16,12 @@
 .el-main {
   height: calc(100% - 120px);
 }
+
+.el-input {
+  width: 100%;
+  transition: width 0.4s ease-in-out;
+}
+
+.el-input--medium:focus {
+  width: 70%;
+}

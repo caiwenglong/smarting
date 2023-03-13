@@ -1,13 +1,29 @@
 <script setup>
-import { RouterView } from 'vue-router';
+import { ref, onBeforeUnmount } from 'vue'
+import { useRouter, RouterView } from 'vue-router'
 import PageNav from '@/components/PageNav.vue';
+
+
+    let currentPath = ref('');
+    const router = useRouter();
+    onBeforeUnmount(() => {
+      // 移除路由变化事件的监听器，以防止内存泄漏
+      router.afterEach(handleRouteChange)
+    })
+
+    const handleRouteChange = (to, from) => {
+      currentPath.value = to.path.subStr(1) // 打印目标路由的路径
+      console.log(currentPath)
+    }
+
+    router.afterEach(handleRouteChange)
 </script>
 
 <template>
   <div class="common-layout">
     <el-container>
       <el-header>
-        <PageNav ref="pageNav"></PageNav>
+        <PageNav ref="pageNav" :aa="currentPath"></PageNav>
       </el-header>
       <el-main>
         <RouterView />
@@ -27,29 +43,8 @@ header {
   margin: 0 auto 2rem;
 }
 
-nav {
-  width: 100%;
-  margin-top: 2rem;
-  font-size: 12px;
-  text-align: center;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+.el-header {
+  padding: 0;
 }
 
 @media (min-width: 1024px) {
