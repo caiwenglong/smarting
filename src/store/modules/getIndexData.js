@@ -20,7 +20,6 @@ export const useIndexData = defineStore('indexData', {
 
     searchPingData(ip, searchValue) {
       const result = IndexData.apiSearchPingData(ip, searchValue).then((res) => {
-        console.log(res);
         if (res.status === 200) {
           return res.data.data;
         }
@@ -31,7 +30,6 @@ export const useIndexData = defineStore('indexData', {
 
     searchPortData(ip, searchValue) {
       const result = IndexData.apiSearchPortData(ip, searchValue).then((res) => {
-        console.log(res);
         if (res.status === 200) {
           return res.data.data;
         }

@@ -25,3 +25,9 @@
 .el-input--medium:focus {
   width: 70%;
 }
+
+
+.vertical-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
