@@ -18,15 +18,8 @@ const handleSwitchMenu = (param) => {
 </script>
 <template>
   <div class="nav-wrapper">
-    <el-menu
-      :default-active="activeIndex"
-      class="el-menu-demo"
-      mode="horizontal"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-      @select="handleSelect"
-    >
+    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" background-color="#545c64"
+      text-color="#fff" active-text-color="#ffd04b" @select="handleSelect">
       <template v-for="(navItem, idx) in navInfos" :key="navItem.routePath">
         <el-menu-item :index="idx" @click="handleSwitchMenu(navItem.identity)">
           <router-link :to="navItem.identity">{{ navItem.name }}</router-link>
@@ -36,11 +29,20 @@ const handleSwitchMenu = (param) => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .nav-wrapper {
   width: 100%;
 }
+
 .nav-wrapper .el-menu {
   padding: 0 42px;
+  .el-menu-item {
+    padding: 0;
+  }
+}
+
+.el-menu--horizontal>.el-menu-item a {
+  width: 96px;
+  text-align: center;
 }
 </style>

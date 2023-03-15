@@ -75,7 +75,6 @@ const handleResetTableData = (newTableData) => {
   forEach(newTableData, (item, index) => {
     tableData[index] = cloneDeep(item)
   })
-  console.log(tableData)
 }
 
 const handleCheckAllChange = (val) => {

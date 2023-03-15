@@ -1,18 +1,20 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
-import { round } from 'lodash';
 import { useIndexData } from '@/store';
 import SearchComponent from '@/components/SearchComponent.vue';
 import EleBaseTable from '@/components/EleBaseTable.vue';
+import { handleGetIndexData } from '@/utils/common'
+import { cloneDeep, forEach } from 'lodash';
 
 const tableData = reactive([]);
 const tableHeader = reactive([
   { prop: 'name', label: '节点名称' },
   { prop: 'ip', label: '响应IP:端口' },
   { prop: 'delay', label: '响应时间' },
+  { prop: 'isLoading', label: '' },
 ]);
 const identity = ref('port');
-
+const backRes = [];
 const indexDataStore = useIndexData();
 
 onMounted(() => {
@@ -20,7 +22,9 @@ onMounted(() => {
 });
 
 const handleSearchData = (searchValue) => {
+  handleResetTableData();
   tableData.forEach((element) => {
+    element.isLoading = true
     indexDataStore.searchPortData(element.addr, searchValue).then((res) => {
       let ip = res?.ip ? res?.ip : '';
       let port = res?.port ? res?.port : '';
@@ -30,17 +34,24 @@ const handleSearchData = (searchValue) => {
       } else if(ip) {
         element.ip = ip
       }
+      element.isLoading = false
     });
   });
 };
 
-const handleGetDataByIdentify = () => {
-  indexDataStore.getPingData().then((res) => {
-    if (res && res.length) {
-      tableData.push(...res);
-    }
-  });
+const handleGetDataByIdentify = async () => {
+  let res = await handleGetIndexData();
+  backRes.push(...res);
+  tableData.push(...res);
 };
+
+const handleResetTableData = (newTableData) => {
+  newTableData = newTableData ? newTableData : backRes;
+  forEach(newTableData, (item, index) => {
+    tableData[index] = cloneDeep(item)
+  })
+}
+
 </script>
 
 <template>
