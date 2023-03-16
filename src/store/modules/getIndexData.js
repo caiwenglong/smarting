@@ -37,5 +37,16 @@ export const useIndexData = defineStore('indexData', {
       });
       return result;
     },
+
+    searchDomainData(ip, searchValue) {
+      const result = IndexData.apiSearchPortData(ip, searchValue).then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          return res.data.data;
+        }
+        return [];
+      });
+      return result;
+    },
   },
 });

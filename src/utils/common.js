@@ -9,3 +9,11 @@ export const handleGetIndexData = () => {
     }
   });
 };
+
+export const handleTurnEmpty = (value, param) => {
+  if(value === undefined || value === null || value === '') {
+    return ''
+  } else {
+    return value + param
+  }
+}

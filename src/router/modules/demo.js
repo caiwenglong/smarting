@@ -14,4 +14,9 @@ export default [
     name: 'port',
     component: () => import('@/views/PortView.vue'),
   },
+  {
+    path: '/domain',
+    name: 'domain',
+    component: () => import('@/views/DomainView.vue'),
+  },
 ];

@@ -11,7 +11,7 @@ const tableHeader = reactive([
   { prop: 'name', label: '节点名称' },
   { prop: 'ip', label: '响应IP:端口' },
   { prop: 'delay', label: '响应时间' },
-  { prop: 'isLoading', label: '' },
+  { prop: 'isLoading', label: '', widthNum: 38 },
 ]);
 const identity = ref('port');
 const backRes = [];

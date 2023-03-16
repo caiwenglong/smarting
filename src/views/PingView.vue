@@ -14,7 +14,7 @@ const tableHeader = reactive([
   { prop: 'RevcPk', label: '收包' },
   { prop: 'MaxDelay', label: '最慢(ms)' },
   { prop: 'AvgDelay', label: '平均(ms)' },
-  { prop: 'isLoading', label: '' },
+  { prop: 'isLoading', label: '' , widthNum: 38 },
 ]);
 const identity = ref('port');
 let backRes = []
@@ -48,13 +48,13 @@ const handleSearchData = (searchValue) => {
         element.RevcPk = res?.ping?.RevcPk;
         element.SendPk = res?.ping?.SendPk;
       } else{
-        element.ip = '--';
-        element.AvgDelay = '--';
-        element.LossPk = '--';
-        element.MaxDelay = '--';
-        element.MinDelay = '--';
-        element.RevcPk = '--';
-        element.SendPk = '--';
+        element.ip = '-';
+        element.AvgDelay = '-';
+        element.LossPk = '-';
+        element.MaxDelay = '-';
+        element.MinDelay = '-';
+        element.RevcPk = '-';
+        element.SendPk = '-';
       }
       element.isLoading = false
     });
