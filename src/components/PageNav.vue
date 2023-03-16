@@ -1,6 +1,15 @@
 <script setup>
-import { reactive, ref } from 'vue';
-
+import { reactive, ref, onMounted, watch } from 'vue';
+import { useCurrentRoutePath } from '@/store';
+import { findIndex } from 'lodash';
+const currentRoutePathStore = useCurrentRoutePath();
+const props = defineProps({
+  currentPath: {
+    type: String,
+    required: false,
+    default: 'ping'
+  }
+})
 const emit = defineEmits(['handleSwitchMenu']);
 const navInfos = reactive([
   { name: 'Ping检测', routePath: 'index.html', identity: 'ping' },
@@ -10,7 +19,17 @@ const navInfos = reactive([
   { name: '路由追踪', routePath: 'transroute.html', identity: 'transroute' },
 ]);
 
-const activeIndex = ref(0);
+let activeIndex = ref(0);
+
+
+watch(
+  () => currentRoutePathStore.currentRoutePath,
+  (newValue, oldValue) => {
+    activeIndex.value = findIndex(navInfos, (item) => {
+      return item.identity === newValue
+    })
+  }
+)
 
 const handleSwitchMenu = (param) => {
   emit('handleSwitchMenu', param);

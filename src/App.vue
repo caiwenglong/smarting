@@ -13,7 +13,6 @@ import PageNav from '@/components/PageNav.vue';
 
     const handleRouteChange = (to, from) => {
       currentPath.value = to.path.subStr(1) // 打印目标路由的路径
-      console.log(currentPath)
     }
 
     router.afterEach(handleRouteChange)
@@ -23,7 +22,7 @@ import PageNav from '@/components/PageNav.vue';
   <div class="common-layout">
     <el-container>
       <el-header>
-        <PageNav ref="pageNav" :aa="currentPath"></PageNav>
+        <PageNav ref="pageNav" :currentPath="currentPath"></PageNav>
       </el-header>
       <el-main>
         <RouterView />

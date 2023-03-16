@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
 import { round, forEach, cloneDeep } from 'lodash';
-import { useIndexData } from '@/store';
+import { useIndexData, useCurrentRoutePath } from '@/store';
 import SearchComponent from '@/components/SearchComponent.vue';
 import EleBaseTable from '@/components/EleBaseTable.vue';
 
@@ -16,7 +16,6 @@ const tableHeader = reactive([
   { prop: 'AvgDelay', label: '平均(ms)' },
   { prop: 'isLoading', label: '' , widthNum: 38 },
 ]);
-const identity = ref('port');
 let backRes = []
 
 const citySelectObj = reactive({
@@ -28,10 +27,12 @@ const citySelectObj = reactive({
 })
 
 const indexDataStore = useIndexData();
+const currentRoutePathStore = useCurrentRoutePath();
 
 onMounted(() => {
   handleGetDataByIdentify();
   handleIsCheckAll();
+  currentRoutePathStore.setCurrentRoutePath('ping');
 });
 
 const handleSearchData = (searchValue) => {

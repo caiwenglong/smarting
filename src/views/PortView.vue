@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue';
-import { useIndexData } from '@/store';
+import { useIndexData, useCurrentRoutePath } from '@/store';
 import SearchComponent from '@/components/SearchComponent.vue';
 import EleBaseTable from '@/components/EleBaseTable.vue';
 import { handleGetIndexData } from '@/utils/common'
@@ -16,9 +16,11 @@ const tableHeader = reactive([
 const identity = ref('port');
 const backRes = [];
 const indexDataStore = useIndexData();
+const currentRoutePathStore = useCurrentRoutePath();
 
 onMounted(() => {
   handleGetDataByIdentify();
+  currentRoutePathStore.setCurrentRoutePath('port')
 });
 
 const handleSearchData = (searchValue) => {
